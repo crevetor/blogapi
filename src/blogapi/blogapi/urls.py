@@ -21,7 +21,6 @@ from blogapi.blog import views
 router = routers.DefaultRouter()
 router.register(r'posts', views.PostViewSet)
 router.register(r'tags', views.TagViewSet)
-router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
