@@ -7,10 +7,10 @@ from blogapi.blog.serializers import (
     TagSerializer,
 )
 
-class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('-published_date')
+class PostViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PostSerializer
 
-class TagViewSet(viewsets.ModelViewSet):
+class TagViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
