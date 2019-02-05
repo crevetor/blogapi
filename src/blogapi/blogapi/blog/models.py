@@ -10,6 +10,11 @@ class Tag(models.Model):
     tag = models.CharField(max_length=255, unique=True)
     description = models.TextField()
 
+class Author(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='photos/')
+
 class Post(models.Model):
 
     def __str__(self):
@@ -21,7 +26,7 @@ class Post(models.Model):
     )
 
     author = models.ForeignKey(
-        User,
+        Author,
         on_delete=models.SET_NULL,
         null=True,
         verbose_name='Author of the post'
