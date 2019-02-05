@@ -33,7 +33,8 @@ class Post(models.Model):
     )
     tags = models.ManyToManyField(
         Tag,
-        verbose_name='Associated tags'
+        verbose_name='Associated tags',
+        blank=True
     )
     state = models.CharField(max_length=1, choices=POST_STATES)
 
