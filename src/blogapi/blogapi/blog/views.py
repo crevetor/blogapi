@@ -7,8 +7,8 @@ from blogapi.blog.serializers import (
     TagSerializer,
 )
 
-    queryset = Post.objects.all().order_by('-published_date')
 class PostViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Post.objects.all().filter(state='P').order_by('-published_date')
     serializer_class = PostSerializer
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
