@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
-from blogapi.blog.models import Tag, Post
+from blogapi.blog.models import Tag, Post, Author
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,7 +14,16 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('url', 'username', 'email')
 
+class AuthorSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Author
+        fields = ('user', 'photo')
+        depth = 1
+
 class PostSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer()
     tags = TagSerializer(many=True)
 
     class Meta:
