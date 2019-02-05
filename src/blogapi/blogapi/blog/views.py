@@ -5,7 +5,6 @@ from blogapi.blog.models import Post, Tag
 from blogapi.blog.serializers import (
     PostSerializer,
     TagSerializer,
-    UserSerializer,
 )
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -15,7 +14,3 @@ class PostViewSet(viewsets.ModelViewSet):
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
