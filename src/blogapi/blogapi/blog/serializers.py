@@ -3,18 +3,21 @@ from django.contrib.auth.models import User
 
 from blogapi.blog.models import Tag, Post
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Post
-        fields = '__all__'
-
-class TagSerializer(serializers.HyperlinkedModelSerializer):
+class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = '__all__'
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'username', 'email')
+
+class PostSerializer(serializers.ModelSerializer):
+    tags = TagSerializer(many=True)
+
+    class Meta:
+        model = Post
+        fields = '__all__'
+        depth = 2
