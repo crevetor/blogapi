@@ -39,6 +39,7 @@ class Post(models.Model):
     state = models.CharField(max_length=1, choices=POST_STATES)
 
     title = models.CharField(max_length=255)
+    summary = models.TextField(null=True)
     content = models.TextField()
 
     created_date = models.DateTimeField(auto_now_add=True)
