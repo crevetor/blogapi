@@ -12,14 +12,11 @@ from blogapi.blog.serializers import (
 
 class PostViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Post.objects.all().filter(state='P').order_by('-published_date')
-
-    def list(self, request):
-        serializer = PostSummarySerializer(self.queryset, many=True)
-        return Response(serializer.data)
+    serializer_class = PostSummarySerializer
 
     def retrieve(self, request, pk=None):
-        post = get_object_or_404(self.queryset, pk=pk)
-        serializer = PostSerializer(post)
+        instance = self.get_object()
+        serializer = PostSerializer(instance, context=self.get_serializer_context())
         return Response(serializer.data)
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
