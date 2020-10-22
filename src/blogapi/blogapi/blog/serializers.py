@@ -22,6 +22,15 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = ('user', 'photo')
         depth = 1
 
+class PostSummarySerializer(serializers.ModelSerializer):
+    author = AuthorSerializer()
+    tags = TagSerializer(many=True)
+
+    class Meta:
+        model = Post
+        fields = ('id', 'author', 'tags', 'title', 'summary', 'published_date')
+        depth = 2
+
 class PostSerializer(serializers.ModelSerializer):
     author = AuthorSerializer()
     tags = TagSerializer(many=True)
